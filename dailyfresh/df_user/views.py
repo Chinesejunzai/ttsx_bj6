@@ -73,33 +73,33 @@ def login_handle(request):
                 response.set_cookie('uname',uname,expires=datetime.datetime.now() + datetime.timedelta(days = 7))
             else:
                 response.set_cookie('uname','',max_age=-1)
-            print 123
+            # print 123
             return response
         else:
             #密码错误
             context['pwd_error']='1'
             return render(request, 'df_user/login.html', context)
 
-# def center(request):
-#     user=UserInfo.objects.get(pk=request.session['uid'])
-#     context={'title':'用户中心','user':user}
-#     return render(request,'df_user/center.html',context)
-#
-# def order(request):
-#     context={'title':'用户订单'}
-#     return render(request,'df_user/order.html',context)
-#
-# def site(request):
-#     user=UserInfo.objects.get(pk=request.session['uid'])
-#     if request.method=='POST':
-#         post=request.POST
-#         user.ushou=post.get('ushou')
-#         user.uaddress=post.get('uaddress')
-#         user.ucode=post.get('ucode')
-#         user.uphone=post.get('uphone')
-#         user.save()
-#     context={'title':'收货地址','user':user}
-#     return render(request,'df_user/site.html',context)
+def center(request):
+    user=UserInfo.objects.get(pk=request.session['uid'])
+    context={'title':'用户中心','user':user}
+    return render(request,'df_user/center.html',context)
+
+def order(request):
+    context={'title':'用户订单'}
+    return render(request,'df_user/order.html',context)
+
+def site(request):
+    user=UserInfo.objects.get(pk=request.session['uid'])
+    if request.method=='POST':
+        post=request.POST
+        user.ushou=post.get('ushou')
+        user.uaddress=post.get('uaddress')
+        user.ucode=post.get('ucode')
+        user.uphone=post.get('uphone')
+        user.save()
+    context={'title':'收货地址','user':user}
+    return render(request,'df_user/site.html',context)
 
 
 
